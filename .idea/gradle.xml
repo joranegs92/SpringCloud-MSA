@@ -27,6 +27,17 @@
           </set>
         </option>
       </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/orderService" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../../../../Gradle/gradle-6.9" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/orderService" />
+          </set>
+        </option>
+      </GradleProjectSettings>
     </option>
   </component>
 </project>

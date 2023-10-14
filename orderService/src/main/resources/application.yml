@@ -1,0 +1,33 @@
+server:
+  port: 8789 # port: 0 = 랜덤포트를 사용하겠다.
+spring:
+  application:
+    name: orderService
+  datasource:
+    url: jdbc:mysql://localhost:3306/msa?rewriteBatchedStatements=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    username: root
+    password: 1111
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    generate-ddl: true
+    show-sql: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+#greeting:
+#  message: Welcome to the --.
+#logging:
+#  level:
+#    com.example.catalogService: DEBUG
+#    root: DEBUG  # 전체 로그 레벨을 DEBUG로 설정합니다.
+#    com.example: TRACE  # 'com.example' 패키지의 로그 레벨을 TRACE로 설정합니다.
