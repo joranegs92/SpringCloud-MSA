@@ -5,6 +5,19 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/catalogService" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../../../../Gradle/gradle-6.9" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/catalogService" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="delegatedBuild" value="true" />
+        <option name="testRunner" value="PLATFORM" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/discoveryservice" />
         <option name="gradleHome" value="$PROJECT_DIR$/../../../../../Gradle/gradle-6.9" />
         <option name="gradleJvm" value="#JAVA_HOME" />

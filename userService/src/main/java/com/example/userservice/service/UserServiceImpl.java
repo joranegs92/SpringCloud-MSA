@@ -4,15 +4,22 @@ package com.example.userservice.service;
 import com.example.userservice.dto.UserDTO;
 import com.example.userservice.jpa.UserEntity;
 import com.example.userservice.jpa.UserRepository;
+import com.example.userservice.vo.ResponseOrder;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService{
 
 
@@ -45,8 +52,56 @@ public class UserServiceImpl implements UserService{
 		return returnUserDto;
 	}
 
+	/*
+	* userEntity (db)를 아이디로 조회한다
+	* 주문한 것들을 포함시켜서 id를 보낸다.
+	* */
+	@Override
+	public UserDTO getUserById(String userId) {
+		UserEntity userEntity = userRepository.findByUserId(userId);
+
+		if (userEntity == null)
+			throw new UsernameNotFoundException("User not found");
+
+		UserDTO userDto = new ModelMapper().map(userEntity, UserDTO.class);
 
 
+		List<ResponseOrder> order = new ArrayList<>();
+		userDto.setOrders(order);
+
+		// Using as rest template
+//        String orderUrl = String.format(env.getProperty("order_service.url"), userId);
+//        ResponseEntity<List<ResponseOrder>> orderListResponse = restTemplate.exchange(orderUrl, HttpMethod.GET, null,
+//                new ParameterizedTypeReference<List<ResponseOrder>>() {
+//        });
+//        List<ResponseOrder> orderList = orderListResponse.getBody();
+
+		// Using as feign client
+		// feign exception handling
+//        List<ResponseOrder> orderList = null;
+//        try {
+//            orderList = orderServiceClient.getOrders(userId);
+//        } catch (FeignException ex) {
+//            log.error(ex.getMessage());
+//        }
+
+		// Error Decoder
+//        List<ResponseOrder> orderList = orderServiceClient.getOrders(userId);
+		log.info("Before call orders microservice");
+		/*CircuitBreaker circuitBreaker = circuitBreakerFactory.create("circuitbreaker");
+		List<ResponseOrder> orderList = circuitBreaker.run(() -> orderServiceClient.getOrders(userId),
+				throwable -> new ArrayList<>()
+		);
+		log.info("After called orders microservice");
+		userDto.setOrders(orderList);
+*/
+		return userDto;
+	}
+
+	@Override
+	public Iterable<UserEntity> getUserByAll() {
+		return userRepository.findAll();
+	}
 
 
 }
