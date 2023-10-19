@@ -16,10 +16,10 @@ spring:
             preLogger: true
             postLogger: true
       routes:
-        - id: user-service
+        - id: user-service # 구분을 위한 고유 아이디
           uri: lb://USERSERVICE
           predicates:
-            - Path=/user-service/**
+            - Path=/user-service/** #이 path로 요청을 하면 위의 uri가 실행되는방식
         - id: catalog-service
           uri: lb://CATALOGSERVICE
           predicates:
