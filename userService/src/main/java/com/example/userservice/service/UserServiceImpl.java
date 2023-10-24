@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
 
 		//-----------------------------------------------------------------------------------------------------------------------------------------------------
 		/*restTemplate 사용방법~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-		String orderUrl = "http://127.0.0.1:8000/order-service/4295d039-fea8-4653-9912-a6517d2eeff0/orders";
+		String orderUrl = "http://order-service/order-service/4295d039-fea8-4653-9912-a6517d2eeff0/orders";
 		/*
 		* restTemplate.exchange(전달할 주소~!,어떤방식으로, 요청할때 파라미터, 전달받고자할때 어떤형식으로 전달받을지 )
 		* */
