@@ -1,4 +1,3 @@
-/*
 package com.example.orderservice.messagequeue;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -32,4 +31,3 @@ public class KafkaProducerConfig {
         return new KafkaTemplate<>(producerFactory());
     }
 }
-*/

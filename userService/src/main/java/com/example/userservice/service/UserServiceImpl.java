@@ -1,6 +1,7 @@
 package com.example.userservice.service;
 
 
+import com.example.userservice.client.OrderServiceClient;
 import com.example.userservice.dto.UserDTO;
 import com.example.userservice.jpa.UserEntity;
 import com.example.userservice.jpa.UserRepository;
@@ -31,7 +32,8 @@ public class UserServiceImpl implements UserService {
 	UserRepository userRepository;
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 	Environment env;
-	RestTemplate restTemplate;
+
+	OrderServiceClient orderServiceClient;
 
 	/*
 	 * BCryptPasswordEncoder 얘를 빈으로 주입하기 위해서는 생성자안에 들어있는 인스턴스들도 초기화가 되어야 한다,
@@ -41,12 +43,12 @@ public class UserServiceImpl implements UserService {
 
 
 	public UserServiceImpl(UserRepository userRepository,
-						   BCryptPasswordEncoder bCryptPasswordEncoder, Environment env,RestTemplate restTemplate
+						   BCryptPasswordEncoder bCryptPasswordEncoder, Environment env, OrderServiceClient orderServiceClient
 	) {
 		this.userRepository = userRepository;
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 		this.env = env;
-		this.restTemplate = restTemplate;
+		this.orderServiceClient = orderServiceClient;
 	}
 
 	@Override
@@ -81,16 +83,16 @@ public class UserServiceImpl implements UserService {
 
 		//-----------------------------------------------------------------------------------------------------------------------------------------------------
 		/*restTemplate 사용방법~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-		String orderUrl = "http://order-service/order-service/4295d039-fea8-4653-9912-a6517d2eeff0/orders";
+		//String orderUrl = "http://order-service/order-service/4295d039-fea8-4653-9912-a6517d2eeff0/orders";
 		/*
 		* restTemplate.exchange(전달할 주소~!,어떤방식으로, 요청할때 파라미터, 전달받고자할때 어떤형식으로 전달받을지 )
 		* */
-		ResponseEntity<List<ResponseOrder>> orderListResponse = restTemplate.exchange(orderUrl, HttpMethod.GET, null,
-				new ParameterizedTypeReference<List<ResponseOrder>>() {
-				});
-		List<ResponseOrder> orderList = orderListResponse.getBody(); //ResponseEntity -> ResponseOrder타입으로 가져오기
-
-		userDto.setOrders(orderList);
+//		ResponseEntity<List<ResponseOrder>> orderListResponse = restTemplate.exchange(orderUrl, HttpMethod.GET, null,
+//				new ParameterizedTypeReference<List<ResponseOrder>>() {
+//				});
+//		List<ResponseOrder> orderList = orderListResponse.getBody(); //ResponseEntity -> ResponseOrder타입으로 가져오기
+//
+//		userDto.setOrders(orderList);
 		//-----------------------------------------------------------------------------------------------------------------------------------------------------
 
 		// Using as rest template

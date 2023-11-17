@@ -1,4 +1,3 @@
-/*
 package com.example.orderservice.messagequeue;
 
 import com.example.orderservice.dto.OrderDto;
@@ -34,4 +33,3 @@ public class KafkaProducer {
         return orderDto;
     }
 }
-*/

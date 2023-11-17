@@ -1,4 +1,3 @@
-/*
 package com.example.orderservice.messagequeue;
 
 import com.example.orderservice.dto.*;
@@ -64,4 +63,3 @@ public class OrderProducer {
         return orderDto;
     }
 }
-*/
